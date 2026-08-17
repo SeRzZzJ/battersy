@@ -43,7 +43,7 @@ fn format_battery_output(status_raw: &str, capacity_raw: &str) -> Result<String,
     let pb = create_progress_bar(capacity);
 
     Ok(format!(
-        "{}{}{}{}{}",
+        "{}{}{} {}{}",
         sc.as_ascii(),
         se,
         cc.as_ascii(),
@@ -54,9 +54,9 @@ fn format_battery_output(status_raw: &str, capacity_raw: &str) -> Result<String,
 
 fn status_color(status: &str) -> Colors {
     match status {
-        "Charging" => Colors::Red,
+        "Charging" => Colors::Yellow,
         "Not charging" => Colors::Green,
-        "Discharging" => Colors::Yellow,
+        "Discharging" => Colors::Red,
         _ => Colors::Reset,
     }
 }
@@ -97,9 +97,9 @@ mod tests {
 
     #[test]
     fn test_status_color() {
-        assert!(matches!(status_color("Charging"), Colors::Red));
+        assert!(matches!(status_color("Charging"), Colors::Yellow));
         assert!(matches!(status_color("Not charging"), Colors::Green));
-        assert!(matches!(status_color("Discharging"), Colors::Yellow));
+        assert!(matches!(status_color("Discharging"), Colors::Red));
         assert!(matches!(status_color("Unknown"), Colors::Reset));
     }
 
@@ -121,6 +121,6 @@ mod tests {
     #[test]
     fn test_format_battery_output() {
         let result = format_battery_output("Charging\n", "42\n").unwrap();
-        assert_eq!(result, "\x1b[31m🡅\x1b[33m42% [####------]\x1b[0m");
+        assert_eq!(result, "\x1b[33m🡅\x1b[33m 42% [####------]\x1b[0m");
     }
 }
