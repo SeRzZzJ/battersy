@@ -1,0 +1,36 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test-and-lint:
+    name: Test & Lint Codebase
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v4
+
+    - name: Set up stable Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        components: clippy, rustfmt
+
+    - name: Enable dependency caching
+      uses: swatinem/rust-cache@v2
+
+    - name: Run code formatting check
+      run: cargo fmt --check
+
+    - name: Verify compilation and code quality (Clippy)
+      run: cargo clippy --all-targets -- -D warnings
+
+    - name: Execute automated unit test suite
+      run: cargo test --verbose
