@@ -17,17 +17,6 @@ pub fn parse_args(args: &mut impl Iterator<Item = String>) -> Result<String, Str
 ///
 /// Returns an error if an unknown switch is applied or no parameters are submitted.
 pub fn verify_flag(arg: Option<&String>) -> Result<(), String> {
-    // arg.as_ref().map_or_else(|| Err("Missing arguments. Expected '-d <path>'".into()), |a| if a == "-d" {
-    //                 Ok(())
-    //             } else {
-    //                 Err("Unknown the argument. Expected '-d'".into())
-    //             })`
-    // 2. clippy: try: `arg.as_ref().map_or_else(|| Err("Missing arguments. Expected '-d <path>'".into()), |a| if a == "-d" {
-    //                    Ok(())
-    //                } else {
-    //                    Err("Unknown the argument. Expected '-d'".into())
-    //                })
-
     arg.map_or_else(
         || Err("Missing arguments. Expected '-d <path>'".into()),
         |a| {
@@ -38,17 +27,6 @@ pub fn verify_flag(arg: Option<&String>) -> Result<(), String> {
             }
         },
     )
-
-    // match arg {
-    //     Some(ref a) => {
-    //         if a == "-d" {
-    //             Ok(())
-    //         } else {
-    //             Err("Unknown the argument. Expected '-d'".into())
-    //         }
-    //     }
-    //     None => Err("Missing arguments. Expected '-d <path>'".into()),
-    // }
 }
 
 /// Grabs directory names out of token streams while scrubbing leading path noise.
