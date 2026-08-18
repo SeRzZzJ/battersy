@@ -1,9 +1,12 @@
 use battersy::run;
 
-use std::process;
+use std::{env, process};
 
+#[cfg(target_os = "linux")]
 fn main() {
-    run().unwrap_or_else(|err| {
+    let mut args = env::args().skip(1);
+
+    run(&mut args).unwrap_or_else(|err| {
         println!("The Error: {err}");
         process::exit(1);
     });
