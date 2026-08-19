@@ -1,10 +1,10 @@
 [package]
 name = "battersy"
-version = "1.2.0"
+version = "1.2.1"
 edition = "2024"
 authors = ["SeRzZzJ <serzzzj.dev@gmail.com>"]
-description = "A lightweight, zero-dependency Linux terminal utility that parses battery status using a pipeline architectural pattern."
-repository = "https://github.com"
+description = "A lightweight, zero-dependency Linux terminal utility that parses battery status."
+repository = "https://github.com/SeRzZzJ/battersy"
 readme = "README.md"
 license = "MIT"
 keywords = ["battery", "cli", "linux", "status", "terminal"]
