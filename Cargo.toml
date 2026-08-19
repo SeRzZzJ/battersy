@@ -1,6 +1,6 @@
 [package]
 name = "battersy"
-rersion = "1.3.1"
+version = "1.3.3"
 edition = "2024"
 authors = ["SeRzZzJ <serzzzj.dev@gmail.com>"]
 description = "A lightweight, zero-dependency Linux terminal utility that parses battery status."
@@ -9,6 +9,7 @@ readme = "README.md"
 license = "MIT"
 keywords = ["battery", "cli", "linux", "status", "terminal"]
 categories = ["command-line-utilities", "os::linux-apis"]
+publish = true
 
 [profile.release]
 opt-level = 3
